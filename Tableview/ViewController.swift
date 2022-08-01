@@ -11,7 +11,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var tableView: UITableView!
     
-    let movies = ["Eternals", "Dune", "No Time To Die", "Last Night in Soho", "Ron’s Done Wrong", "Halloween Kills", "Venom", "Antlers", "The Addams Family 2"]
+    var movies = ["Eternals", "Dune", "No Time To Die", "Last Night in Soho", "Ron’s Done Wrong", "Halloween Kills", "Venom", "Antlers", "The Addams Family 2"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,6 +42,24 @@ extension ViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         cell.textLabel?.text = movies[indexPath.row]
         return cell
+    }
+    
+    
+    func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    func tableView(_ tableView: UITableView, moveRowAt sourceIndexPath: IndexPath, to destinationIndexPath: IndexPath) {
+        movies.swapAt(sourceIndexPath.row, destinationIndexPath.row)
+    }
+    
+    @IBAction func didTapEdit() {
+        if tableView.isEditing{
+            tableView.isEditing = false
+        }
+        else{
+            tableView.isEditing = true
+        }
+        
     }
     
 }
